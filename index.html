@@ -16,6 +16,15 @@
                 <button type="submit">Login</button>
             </form>
         </div>
+        <div class="container">
+        <div class="signup-container" style="display:none;">
+            <h2>Sign Up</h2>
+            <form id="signupForm">
+                <input type="text" id="signupUsername" placeholder="Username">
+                <input type="text" id="signupPassword" placeholder="Password">
+                <button type="submit">Sign Up</button>
+            </form>
+        </div>
         <div class="dashboard-container" id="dashboard" style="display:none;">
             <h2>Welcome, <span id="usernameDisplay"></span>!</h2>
             <div id="mathContent">
@@ -24,5 +33,47 @@
         </div>
     </div>
     <script src="script.js"></script>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission
+            
+            // Get the values from the input fields
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+            
+            // Your authentication logic goes here (e.g., checking against a database)
+            // For demonstration purposes, let's assume the username is "admin" and password is "password"
+            if (username === 'admin' && password === 'password' && isFoundationPhase(username)) {
+                // Hide the login container and display the dashboard
+                document.getElementById('loginForm').reset(); // Reset form fields
+                document.getElementById('loginForm').style.display = 'none';
+                document.getElementById('dashboard').style.display = 'block';
+                document.getElementById('usernameDisplay').textContent = username;
+            } else {
+                alert('Invalid username or password. Please try again.');
+            }
+        });
+
+        //Signup form submission
+        document.getElementById('signupForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission
+
+            //Get the value from the input fields
+            var signupUsername= document.getElementById('signupUsername').value;
+            var signupPassword= document.getElementById('signupPassword').value;
+
+            //Your signup logic goes here (e.g., storing user data in a database)
+            //For demonstration purposes, let's assume the sign up the signup is successful
+            alert('Signup successful! You can now login with your credentials.');
+            
+            //Clear the signup form
+            document.getElementById('signupForm').reset();
+        });
+
+        //Function to check if the username belongs to the foundation phase
+        function isFoundationPhase(username) {
+            return username.toLowerCase().endsWith('foundation');
+        }
+    </script>
 </body>
 </html>
